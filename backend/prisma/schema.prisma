@@ -15,6 +15,7 @@ datasource db {
 
 model User {
   id       String    @id @unique @default(uuid())
+  isAdmin  Boolean   @default(false)
   email    String    @unique
   username String    @unique
   password String
@@ -23,7 +24,6 @@ model User {
 
 model Post {
   id         String    @id @unique @default(uuid())
-  isAdmin    Boolean   @default(false)
   title      String
   cover_url  String
   thoughts   String
