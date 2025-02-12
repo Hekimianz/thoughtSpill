@@ -1,0 +1,103 @@
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  flex-grow: 1;
+  position: relative;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  gap: 5px;
+  font-family: "Poppins";
+}
+
+.label {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.input {
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  width: 70%;
+  padding: 1px 4px;
+  caret-color: var(--onyx);
+  color: var(--onyx);
+  font-size: 1.6rem;
+}
+
+.input:focus {
+  outline: 2px solid var(--olive);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  color: var(--onyx);
+  font-weight: 500;
+  font-family: "Poppins";
+  margin-top: 5px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-size: 1.6rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--onyx);
+  color: var(--beige);
+  border: none;
+  font-weight: 700;
+  transform: scale(1.1);
+  outline: 3px solid var(--olive);
+}
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
+
+.error {
+  color: var(--red);
+  font-weight: 700;
+  position: absolute;
+  top: 35%;
+  font-size: 1.6rem;
+  text-shadow: 0px 2px 4px rgba(64, 63, 76, 0.3);
+}
+
+.loader {
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid var(--onyx);
+  border-bottom-color: #d4a373;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: absolute;
+  top: 30%;
+}
+
+.welcome {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
