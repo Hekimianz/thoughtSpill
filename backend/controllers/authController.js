@@ -25,7 +25,52 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ accessToken });
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "lax", // Lax in development
+      secure: false,
+      maxAge: 3600000, // 1 hour in milliseconds
+      path: "/",
+    });
+    res.json({ message: "Login succesfull" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+exports.loginAdmin = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: username, isAdmin: true },
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    const accessToken = jwt.sign(
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "lax", // Lax in development
+      secure: false,
+      maxAge: 3600000, // 1 hour in milliseconds
+      path: "/",
+    });
+    res.json({ message: "Login succesfull" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
@@ -65,4 +110,14 @@ exports.register = async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
   }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    sameSite: "strict",
+    path: "/",
+  });
+
+  res.json({ message: "Logged out successfully" });
 };
