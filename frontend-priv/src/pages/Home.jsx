@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authProvider";
-import Header from "../components/Header";
+import { getPosts } from "../api/posts";
 import BookCard from "../components/bookCard.";
 import styles from "./Home.module.css";
 function Home() {
-  const { user, login, loading: authLoading, posts } = useAuth();
+  const { user, login, loading: authLoading } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const fetchedPosts = await getPosts();
+        setPosts(fetchedPosts);
+      } catch (err) {
+        setError("Failed to fetch posts.");
+        console.error(err);
+      }
+    };
+    if (user) {
+      fetchPosts();
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

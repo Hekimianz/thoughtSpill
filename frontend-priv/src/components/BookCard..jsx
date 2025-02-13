@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./BookCard.module.css";
 
 function BookCard({
@@ -10,14 +11,15 @@ function BookCard({
   id,
 }) {
   return (
-    <div
+    <Link
+      to={`/post/${id}`}
       className={`${styles.bookCard__cont} ${
         published ? styles.published : styles.unpublished
       }`}
     >
       <img className={styles.cover} src={cover_url} alt="cover" />
       <h3 className={styles.title}>{title}</h3>
-    </div>
+    </Link>
   );
 }
 

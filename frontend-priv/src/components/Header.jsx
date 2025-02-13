@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useAuth } from "../contexts/authProvider";
 
@@ -6,14 +7,14 @@ function Header() {
 
   return (
     <section className={styles.header__cont}>
-      <div className={styles.logo__cont}>
+      <Link to="/" className={styles.logo__cont}>
         <img className={styles.logo} src="/logo__transparent.png" alt="logo" />
         <h1 className={styles.logo__text}>ThoughtSpill</h1>
-      </div>
+      </Link>
       {user && (
-        <button className={`${styles.button} ${styles.addBtn}`}>
+        <Link to="/add-post" className={`${styles.button} ${styles.addBtn}`}>
           Add Post
-        </button>
+        </Link>
       )}
       {user && (
         <button className={styles.button} onClick={logout}>

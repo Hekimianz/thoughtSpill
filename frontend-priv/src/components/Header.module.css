@@ -7,6 +7,11 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+a {
+  color: var(--onyx);
+  text-decoration: none;
+}
+
 .logo {
   width: 70px;
   margin-bottom: -10px;
@@ -34,6 +39,7 @@
   cursor: pointer;
   transition: 0.2s all ease;
   font-size: 1.6rem;
+  text-decoration: none;
 }
 
 .button:hover,

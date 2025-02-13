@@ -39,7 +39,8 @@ exports.getComments = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const { pages, title, date_published, author, cover_url } = req.body;
+    const { pages, title, date_published, author, cover_url, published } =
+      req.body;
     const id = req.params.id;
     const updatedBook = await prisma.post.update({
       where: { id },
@@ -49,6 +50,7 @@ exports.updatePost = async (req, res) => {
         date_published,
         author,
         cover_url,
+        published,
       },
     });
     console.log(updatedBook);

@@ -5,11 +5,9 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     verifyToken();
-    getPosts();
   }, []);
 
   const verifyToken = async () => {
@@ -84,26 +82,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const getPosts = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/posts", {
-        method: "GET",
-        credentials: "include",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setPosts(data.posts);
-        console.log(data.posts);
-      } else {
-        setPosts([]);
-      }
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-      throw error;
-    }
-  };
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, posts }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
