@@ -32,23 +32,23 @@ function Post() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    setUpdateError(null); // Clear previous update errors
-    setIsUpdating(true); // Set updating state
+    setUpdateError(null);
+    setIsUpdating(true);
 
     try {
       if (isEqual(post, updatedBook)) return;
       const updatedPostData = await updatePost(id, updatedBook);
-      setPost(updatedPostData); // Update the 'post' state with the server response
-      setUpdatedBook({ ...updatedPostData }); //and the updatedBook
+      setPost(updatedPostData);
+      setUpdatedBook({ ...updatedPostData });
     } catch (err) {
       setUpdateError(err.message || "Failed to update post");
     } finally {
-      setIsUpdating(false); // Reset updating state
+      setIsUpdating(false);
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <span className={styles.loader}></span>;
   }
 
   if (error) {
@@ -155,6 +155,23 @@ function Post() {
                   setUpdatedBook({ ...updatedBook, cover_url: e.target.value });
                 }}
                 disabled={isUpdating}
+              />
+            </li>
+            <li>
+              <label htmlFor="published" className={styles.bold}>
+                Published:
+              </label>
+              <input
+                type="checkbox"
+                name="published"
+                id="published"
+                onChange={(e) => {
+                  setUpdatedBook({
+                    ...updatedBook,
+                    published: e.target.checked,
+                  });
+                }}
+                checked={updatedBook.published}
               />
             </li>
           </ul>
