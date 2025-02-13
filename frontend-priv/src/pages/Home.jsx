@@ -29,7 +29,6 @@ function Home() {
 
   return (
     <>
-      <Header />
       {user ? (
         <div className={styles.userPage__cont}>
           <h2 className={styles.welcome}>Welcome, Aram!</h2>
