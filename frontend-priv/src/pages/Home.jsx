@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/authProvider";
 import Header from "../components/Header";
+import BookCard from "../components/bookCard.";
 import styles from "./Home.module.css";
 function Home() {
-  const { user, login, loading: authLoading } = useAuth();
+  const { user, login, loading: authLoading, posts } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,16 +24,41 @@ function Home() {
   };
 
   if (authLoading) {
-    return <div>Loading...</div>;
+    return <span className={styles.loader}></span>;
   }
 
   return (
     <>
       <Header />
       {user ? (
-        <div>
+        <div className={styles.userPage__cont}>
           <h2 className={styles.welcome}>Welcome, Aram!</h2>
-          {/*  Add content for logged-in users */}
+          <div className={styles.legend__cont}>
+            <div className={styles.legend__field}>
+              <div className={styles.legend__square}></div>
+              <p className={styles.legend__text}>Published</p>
+            </div>
+            <div className={styles.legend__field}>
+              <div className={`${styles.legend__square} ${styles.red}`}></div>
+              <p className={styles.legend__text}>Not Published</p>
+            </div>
+          </div>
+          <section className={styles.posts__cont}>
+            {posts.map((book) => {
+              return (
+                <BookCard
+                  key={book.id}
+                  title={book.title}
+                  cover_url={book.cover_url}
+                  created_at={book.created_at}
+                  published={book.published}
+                  thoughts={book.thoughts}
+                  type={book.type}
+                  id={book.id}
+                />
+              );
+            })}
+          </section>
         </div>
       ) : (
         <form className={styles.login__form} onSubmit={handleSubmit}>

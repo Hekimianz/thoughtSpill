@@ -1,0 +1,62 @@
+.bookCard__cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 250px;
+  border: 1px solid var(--onyx);
+  padding: 2rem 2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: 0.2s all ease;
+}
+
+.bookCard__cont:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transform: scale(1.05);
+  border: 2px solid var(--olive);
+}
+
+.bookCard__cont:hover .cover {
+  transform: scale(1.01);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.bookCard__cont:hover .title {
+  font-weight: 750;
+}
+
+.bookCard__cont:active {
+  transform: scale(1);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: 0.5px solid var(--olive);
+}
+
+.bookCard__cont:active .cover {
+  transform: scale(1);
+}
+
+.cover {
+  width: 100%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  align-self: center;
+  transition: 0.5s all ease;
+}
+
+.title {
+  margin-top: 1rem;
+  font-family: "Poppins";
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.published {
+  border-color: var(--green);
+}
+
+.unpublished {
+  border-color: var(--red);
+}

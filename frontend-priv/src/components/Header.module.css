@@ -1,9 +1,8 @@
 .header__cont {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1rem 0;
+  justify-content: space-between;
+  padding: 1rem 1rem;
   border-bottom: 1px solid var(--onyx);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -15,5 +14,43 @@
 
 .logo__text {
   font-family: "Noto Serif";
-  font-size: 2.4rem;
+  font-size: 2.2rem;
+}
+
+.logo__cont {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  color: var(--onyx);
+  font-weight: 500;
+  font-family: "Poppins";
+  margin-top: 5px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-size: 1.6rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--onyx);
+  color: var(--beige);
+  border: none;
+  font-weight: 700;
+  transform: scale(1.05);
+  border: 2px solid var(--red);
+}
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
+
+.addBtn:hover,
+.addBtn:focus {
+  border: 2px solid var(--green);
 }
