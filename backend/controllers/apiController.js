@@ -2,8 +2,22 @@ const prisma = require("../config/prismaClient");
 
 exports.getPosts = async (req, res) => {
   try {
-    const posts = await prisma.post.findMany();
-    res.json({ posts });
+    const { title } = req.query;
+    if (title) {
+      const posts = await prisma.post.findMany({
+        where: {
+          title: {
+            contains: title,
+            mode: "insensitive",
+          },
+        },
+      });
+
+      res.json({ posts });
+    } else {
+      const posts = await prisma.post.findMany();
+      return res.json({ posts });
+    }
   } catch (err) {
     console.error(err);
     res.json({ error: "Internal server error" });
