@@ -1,8 +1,13 @@
 const API_BASE_URL = "http://localhost:3000/api";
 
-export const getPosts = async () => {
+export const getPosts = async (searchTerm = "") => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts`, {
+    let url = `${API_BASE_URL}/posts`;
+
+    if (searchTerm) {
+      url += `?title=${encodeURIComponent(searchTerm)}`;
+    }
+    const response = await fetch(url, {
       method: "GET",
       credentials: "include",
     });
@@ -12,9 +17,9 @@ export const getPosts = async () => {
         errorData.message || `HTTP error! status ${response.status}`
       );
     }
-    const posts = await response.json();
+    const { posts } = await response.json();
 
-    return posts.posts.reverse();
+    return posts.reverse();
   } catch (error) {
     console.error("Error fetching posts:", error);
     throw error;

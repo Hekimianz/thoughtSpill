@@ -3,13 +3,12 @@ import { useAuth } from "../contexts/authProvider";
 import { getPosts } from "../api/posts";
 import BookCard from "../components/bookCard.";
 import styles from "./Home.module.css";
-function Home() {
+function Home({ posts, setPosts, loadingPosts }) {
   const { user, login, loading: authLoading } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,7 +38,7 @@ function Home() {
     }
   };
 
-  if (authLoading) {
+  if (authLoading || loadingPosts) {
     return <span className={styles.loader}></span>;
   }
 
@@ -59,20 +58,21 @@ function Home() {
             </div>
           </div>
           <section className={styles.posts__cont}>
-            {posts.map((book) => {
-              return (
-                <BookCard
-                  key={book.id}
-                  title={book.title}
-                  cover_url={book.cover_url}
-                  created_at={book.created_at}
-                  published={book.published}
-                  thoughts={book.thoughts}
-                  type={book.type}
-                  id={book.id}
-                />
-              );
-            })}
+            {posts &&
+              posts.map((book) => {
+                return (
+                  <BookCard
+                    key={book.id}
+                    title={book.title}
+                    cover_url={book.cover_url}
+                    created_at={book.created_at}
+                    published={book.published}
+                    thoughts={book.thoughts}
+                    type={book.type}
+                    id={book.id}
+                  />
+                );
+              })}
           </section>
         </div>
       ) : (

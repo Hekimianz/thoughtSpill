@@ -145,3 +145,31 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (min-width: 768px) {
+  .welcome {
+    font-size: 2rem;
+  }
+
+  .posts__cont {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .legend__cont {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .welcome {
+    font-size: 2rem;
+  }
+
+  .posts__cont {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .legend__cont {
+    font-size: 1.6rem;
+  }
+}

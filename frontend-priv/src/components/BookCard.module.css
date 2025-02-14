@@ -4,7 +4,7 @@
   align-items: center;
   width: 80%;
   max-width: 250px;
-  border: 1px solid var(--onyx);
+  border: 1px solid;
   padding: 2rem 2rem;
   border-radius: 20px;
   cursor: pointer;
@@ -16,7 +16,7 @@
 .bookCard__cont:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transform: scale(1.05);
-  border: 2px solid var(--olive);
+  border: 3px solid;
 }
 
 .bookCard__cont:hover .cover {
@@ -57,6 +57,14 @@
   border-color: var(--green);
 }
 
+.published:hover {
+  border-color: var(--green);
+}
+
 .unpublished {
+  border-color: var(--red);
+}
+
+.unpublished:hover {
   border-color: var(--red);
 }

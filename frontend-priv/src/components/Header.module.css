@@ -25,20 +25,21 @@ a {
 .logo__cont {
   display: flex;
   align-items: center;
+  margin-right: auto;
 }
 
 .button {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   background-color: transparent;
   border: 1px solid var(--onyx);
   border-radius: 4px;
   color: var(--onyx);
   font-weight: 500;
   font-family: "Poppins";
-  margin-top: 5px;
+
   cursor: pointer;
   transition: 0.2s all ease;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   text-decoration: none;
 }
 
@@ -56,7 +57,33 @@ a {
   opacity: 0.9;
 }
 
+.addBtn {
+  margin: 0 15px;
+  text-align: center;
+}
+
 .addBtn:hover,
 .addBtn:focus {
   border: 2px solid var(--green);
+}
+
+.search {
+  width: 50px;
+  margin-left: 10px;
+  text-align: center;
+  background-color: var(--beige);
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.2) 0px 18px 3px -20px inset;
+}
+
+@media screen and (min-width: 768px) {
+  .header__cont {
+    padding: 2rem 4rem;
+  }
+
+  .search {
+    width: 100px;
+  }
 }
