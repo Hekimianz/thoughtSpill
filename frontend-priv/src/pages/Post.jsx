@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getPost, updatePost, deletePost } from "../api/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Editor } from "@tinymce/tinymce-react";
 import { isEqual } from "lodash";
 import styles from "./Post.module.css";
 
@@ -17,6 +18,8 @@ function Post() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [confDelete, setConfDelete] = useState(false);
   const navigate = useNavigate();
+
+  const editorRef = useRef(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,9 +37,13 @@ function Post() {
     fetchPost();
   }, [id]);
 
-  const handleDelete = (id) => {
-    deletePost(id);
-    navigate("/");
+  const handleDelete = async (id) => {
+    try {
+      await deletePost(id);
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
 
   const handleUpdate = async (e) => {
@@ -45,8 +52,15 @@ function Post() {
     setIsUpdating(true);
 
     try {
-      if (isEqual(post, updatedBook)) return;
-      const updatedPostData = await updatePost(id, updatedBook);
+      const editorContent = editorRef.current
+        ? editorRef.current.getContent()
+        : updatedBook.thoughts;
+      const updatedDataToSend = { ...updatedBook, thoughts: editorContent };
+      if (isEqual(post, updatedDataToSend)) {
+        setIsUpdating(false);
+        return;
+      }
+      const updatedPostData = await updatePost(id, updatedDataToSend);
       setPost(updatedPostData);
       setUpdatedBook({ ...updatedPostData });
     } catch (err) {
@@ -54,6 +68,10 @@ function Post() {
     } finally {
       setIsUpdating(false);
     }
+  };
+
+  const handleEditorChange = (content, editor) => {
+    setUpdatedBook((prevBook) => ({ ...prevBook, thoughts: content }));
   };
 
   if (loading) {
@@ -237,6 +255,50 @@ function Post() {
               />
             </li>
           </ul>
+          <label
+            htmlFor="thoughts"
+            className={`${styles.bold} ${styles.textarea__label}`}
+          >
+            Analysis:
+          </label>
+          <Editor
+            apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+            onInit={(evt, editor) => (editorRef.current = editor)}
+            value={updatedBook.thoughts || ""} // Use value, not initialValue
+            onEditorChange={handleEditorChange}
+            disabled={isUpdating}
+            init={{
+              height: 300,
+              menubar: false,
+              plugins: [
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "code",
+                "help",
+                "wordcount",
+              ],
+              toolbar:
+                "undo redo | blocks | " +
+                "bold italic forecolor | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | help",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+            }}
+          />
           <button
             type="submit"
             onClick={handleUpdate}

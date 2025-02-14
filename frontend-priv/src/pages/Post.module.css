@@ -57,7 +57,7 @@
   color: var(--onyx);
   font-weight: 500;
   font-family: "Poppins";
-  margin-top: 5px;
+  margin-top: 15px;
   cursor: pointer;
   transition: 0.2s all ease;
   font-size: 1.6rem;
@@ -192,6 +192,11 @@
 .delete__cont div button:last-of-type:hover {
   background-color: #f63a21;
   color: var(--onyx);
+}
+
+.textarea__label {
+  margin: 10px;
+  border-bottom: 1px solid var(--onyx);
 }
 
 @keyframes rotation {
