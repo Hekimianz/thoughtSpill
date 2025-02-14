@@ -14,7 +14,7 @@ export const getPosts = async () => {
     }
     const posts = await response.json();
 
-    return posts.posts;
+    return posts.posts.reverse();
   } catch (error) {
     console.error("Error fetching posts:", error);
     throw error;
@@ -79,6 +79,30 @@ export const deletePost = async (id) => {
     }
   } catch (err) {
     console.error("Error deleting book:", err);
+    throw err;
+  }
+};
+
+export const addPost = async (post) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/posts`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `HTTP error! status ${response.status}`
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error cretaing post:", err);
     throw err;
   }
 };

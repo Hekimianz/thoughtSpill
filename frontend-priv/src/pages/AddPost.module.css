@@ -1,0 +1,69 @@
+.main__cont {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  margin-top: 5rem;
+  font-family: "Poppins";
+}
+
+.bold {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.update__input {
+  background-color: transparent;
+  border: 0.5px solid var(--onyx);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.main__cont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main__cont li {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.main__cont form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  color: var(--onyx);
+  font-weight: 500;
+  font-family: "Poppins";
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-size: 1.6rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--onyx);
+  color: var(--beige);
+  border: none;
+  font-weight: 700;
+  transform: scale(1.1);
+  outline: 3px solid var(--olive);
+}
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
