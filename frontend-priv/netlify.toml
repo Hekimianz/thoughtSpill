@@ -1,0 +1,41 @@
+[[headers]]
+  for = "/*"  # For HTML
+
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
+
+[[headers]]
+  for = "/*.js"  # For JavaScript
+
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.jsx"
+
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.ts"
+
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.tsx"
+
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.css"  # For CSS
+
+  [headers.values]
+    Content-Type = "text/css"
+
+# _redirects for SPA routing (important!)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

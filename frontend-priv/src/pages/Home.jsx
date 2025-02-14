@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authProvider";
 import { getPosts } from "../api/posts";
-import BookCard from "../components/bookCard.";
+import BookCard from "../components/BookCard";
 import styles from "./Home.module.css";
 function Home({ posts, setPosts, loadingPosts }) {
   const { user, login, loading: authLoading } = useAuth();
