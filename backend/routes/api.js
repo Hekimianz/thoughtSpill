@@ -6,4 +6,5 @@ route.get("/posts", apiController.getPosts);
 route.get("/posts/:id", apiController.getPost);
 route.get("/posts/comments/:id", apiController.getComments);
 route.put("/posts/:id", apiController.updatePost);
+route.delete("/posts/:id", apiController.deletePost);
 module.exports = route;

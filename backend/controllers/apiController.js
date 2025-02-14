@@ -39,7 +39,7 @@ exports.getComments = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const { pages, title, date_published, author, cover_url, published } =
+    const { pages, title, date_published, author, cover_url, published, isbn } =
       req.body;
     const id = req.params.id;
     const updatedBook = await prisma.post.update({
@@ -51,6 +51,7 @@ exports.updatePost = async (req, res) => {
         author,
         cover_url,
         published,
+        isbn,
       },
     });
     console.log(updatedBook);
@@ -58,5 +59,19 @@ exports.updatePost = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.json({ error: "Interna server error" });
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedBook = await prisma.post.delete({
+      where: { id },
+    });
+    console.log("Book deleted:", deletedBook);
+    res.json({ message: "Book deleted", book: deletedBook });
+  } catch (err) {
+    console.error(err);
+    res.json({ error: "Internal server error" });
   }
 };
