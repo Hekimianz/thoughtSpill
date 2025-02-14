@@ -1,18 +1,22 @@
-// src/pages/Post.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPost, updatePost } from "../api/posts"; // Make sure these are correct
+import { useNavigate } from "react-router-dom";
+import { getPost, updatePost, deletePost } from "../api/posts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { isEqual } from "lodash";
 import styles from "./Post.module.css";
 
 function Post() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [updatedBook, setUpdatedBook] = useState({}); // Initialize as an empty object
+  const [updatedBook, setUpdatedBook] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [updateError, setUpdateError] = useState(null); // Separate error for updates
-  const [isUpdating, setIsUpdating] = useState(false); // Track update in progress
+  const [updateError, setUpdateError] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [confDelete, setConfDelete] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -29,6 +33,11 @@ function Post() {
 
     fetchPost();
   }, [id]);
+
+  const handleDelete = (id) => {
+    deletePost(id);
+    navigate("/");
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -65,10 +74,47 @@ function Post() {
         <h1 className={styles.title}>{post.title}</h1>
         <h2 className={styles.author}>{post.author}</h2>
         <img className={styles.cover} src={post.cover_url} alt="cover" />
-
+        <span className={styles.trashIcon}>
+          <FontAwesomeIcon
+            icon={faTrash}
+            onClick={() => {
+              setConfDelete(true);
+            }}
+          />
+        </span>
+        {confDelete && (
+          <div className={styles.delete__cont__overlay}>
+            <div className={styles.delete__cont}>
+              <span className={styles.closeIcon}>
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  onClick={() => {
+                    setConfDelete(false);
+                  }}
+                />
+              </span>
+              <p>Are you sure you want to delete this book?</p>
+              <div>
+                <button
+                  onClick={() => {
+                    setConfDelete(false);
+                  }}
+                >
+                  No
+                </button>
+                <button
+                  onClick={() => {
+                    handleDelete(id);
+                  }}
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <form className={styles.update__form}>
           {updateError && <p style={{ color: "red" }}>{updateError}</p>}{" "}
-          {/* Display update errors */}
           <ul>
             <li>
               <label htmlFor="pages" className={styles.bold}>
@@ -77,13 +123,13 @@ function Post() {
               <input
                 id="pages"
                 name="pages"
-                type="text" // Use type="number" for numeric input
+                type="text"
                 className={styles.update__input}
-                value={updatedBook.pages || ""} // Handle potential undefined
+                value={updatedBook.pages || ""}
                 onChange={(e) => {
                   setUpdatedBook({
                     ...updatedBook,
-                    pages: parseInt(e.target.value, 10), // Parse to integer
+                    pages: parseInt(e.target.value, 10),
                   });
                 }}
                 disabled={isUpdating}
@@ -98,7 +144,7 @@ function Post() {
                 name="datePub"
                 type="text"
                 className={styles.update__input}
-                value={updatedBook.date_published || ""} // Handle undefined
+                value={updatedBook.date_published || ""}
                 onChange={(e) => {
                   setUpdatedBook({
                     ...updatedBook,
@@ -108,7 +154,7 @@ function Post() {
                 disabled={isUpdating}
               />
             </li>
-            {/* ... other input fields (title, author, cover_url) - similarly handle undefined ... */}
+
             <li>
               <label htmlFor="title" className={styles.bold}>
                 Title:
@@ -153,6 +199,22 @@ function Post() {
                 value={updatedBook.cover_url || ""}
                 onChange={(e) => {
                   setUpdatedBook({ ...updatedBook, cover_url: e.target.value });
+                }}
+                disabled={isUpdating}
+              />
+            </li>
+            <li>
+              <label htmlFor="isbn" className={styles.bold}>
+                ISBN:
+              </label>
+              <input
+                id="isbn"
+                name="isbn"
+                type="text"
+                className={styles.update__input}
+                value={updatedBook.isbn || ""}
+                onChange={(e) => {
+                  setUpdatedBook({ ...updatedBook, isbn: e.target.value });
                 }}
                 disabled={isUpdating}
               />

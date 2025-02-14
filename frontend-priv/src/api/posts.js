@@ -64,3 +64,21 @@ export const updatePost = async (id, post) => {
     throw error;
   }
 };
+
+export const deletePost = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/posts/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `HTTP ERROR! status ${response.status}`
+      );
+    }
+  } catch (err) {
+    console.error("Error deleting book:", err);
+    throw err;
+  }
+};
