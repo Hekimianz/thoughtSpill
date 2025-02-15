@@ -28,8 +28,8 @@ exports.login = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "lax", // Lax in development
-      secure: false,
+      sameSite: "none", // Lax in development
+      secure: true,
       maxAge: 3600000, // 1 hour in milliseconds
       path: "/",
     });
@@ -65,9 +65,9 @@ exports.loginAdmin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "lax", // Lax in development
-      secure: false,
-      maxAge: 3600000, // 1 hour in milliseconds
+      sameSite: "none",
+      secure: true,
+      maxAge: 3600000,
       path: "/",
     });
     res.json({ message: "Login succesfull" });
@@ -115,7 +115,8 @@ exports.register = async (req, res) => {
 exports.logout = (req, res) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "none",
+    secure: true,
     path: "/",
   });
 
