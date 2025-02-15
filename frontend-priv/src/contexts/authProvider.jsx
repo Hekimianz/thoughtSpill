@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+const base_url = import.meta.env.VITE_API_BASE_URL;
 
 const AuthContext = createContext(null);
 
@@ -12,9 +13,10 @@ export const AuthProvider = ({ children }) => {
 
   const verifyToken = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/verify-token", {
+      const response = await fetch(`${base_url}/auth/verify-token`, {
         credentials: "include",
       });
+
       if (response.ok) {
         const data = await response.json();
         if (data.isAdmin) {
@@ -44,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login-admin", {
+      const response = await fetch(`${base_url}/auth/login-admin`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -52,7 +54,6 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ username, password }),
       });
-
       if (response.ok) {
         await verifyToken();
       } else if (response.status === 401) {
@@ -68,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
+      const response = await fetch(`${base_url}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

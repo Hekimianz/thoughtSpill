@@ -1,9 +1,7 @@
-const API_BASE_URL = "http://localhost:3000/api";
-
+const base_url = import.meta.env.VITE_API_BASE_URL;
 export const getPosts = async (searchTerm = "") => {
   try {
-    let url = `${API_BASE_URL}/posts`;
-
+    let url = `${base_url}/api/posts`;
     if (searchTerm) {
       url += `?title=${encodeURIComponent(searchTerm)}`;
     }
@@ -11,6 +9,7 @@ export const getPosts = async (searchTerm = "") => {
       method: "GET",
       credentials: "include",
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -28,7 +27,7 @@ export const getPosts = async (searchTerm = "") => {
 
 export const getPost = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${id}`, {
+    const response = await fetch(`${base_url}/api/posts/${id}`, {
       method: "GET",
       credentials: "include",
     });
@@ -48,7 +47,7 @@ export const getPost = async (id) => {
 
 export const updatePost = async (id, post) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${id}`, {
+    const response = await fetch(`${base_url}/api/posts/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json", // VERY IMPORTANT for JSON
@@ -72,7 +71,7 @@ export const updatePost = async (id, post) => {
 
 export const deletePost = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${id}`, {
+    const response = await fetch(`${base_url}/api/posts/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -90,7 +89,7 @@ export const deletePost = async (id) => {
 
 export const addPost = async (post) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts`, {
+    const response = await fetch(`${base_url}/api/posts`, {
       method: "POST",
       credentials: "include",
       headers: {
