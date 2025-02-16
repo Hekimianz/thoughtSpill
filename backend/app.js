@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://thoughtspill-admin.netlify.app",
+    origin: [process.env.ADMIN_ORIGIN, process.env.CLIENT_ORIGIN],
     credentials: true,
   })
 );
