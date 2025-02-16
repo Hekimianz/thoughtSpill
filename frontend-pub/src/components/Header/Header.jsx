@@ -11,7 +11,7 @@ function Header() {
     <header className={styles.header__cont}>
       <Link to="/" className={styles.logo__cont}>
         <img className={styles.logo} src="/logo__transparent.png" alt="logo" />
-        <h1 className={styles.logo__text}>ThoughtSpill</h1>
+        <h3 className={styles.logo__text}>ThoughtSpill</h3>
       </Link>
       <button
         className={`${styles.icon} ${menuOpen ? styles.arrIcon : ""}`}
