@@ -9,7 +9,7 @@ function Home() {
       </h2>
 
       <div className={styles.inner__cont}>
-        <img className={styles.welcomeImg} src="/stackBooks.jpg" alt="" />
+        <img className={styles.welcomeImg} src="/stackBooks.png" alt="" />
 
         <div className={styles.secondInner__cont}>
           <p className={styles.paragraph}>
@@ -25,7 +25,7 @@ function Home() {
       </div>
 
       <div className={styles.inner__cont}>
-        <img className={styles.welcomeImg} src="/bookCoffee.jpg" alt="" />
+        <img className={styles.welcomeImg} src="/bookCoffee.png" alt="" />
 
         <div className={styles.secondInner__cont}>
           <p className={styles.paragraph}>
