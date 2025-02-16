@@ -1,0 +1,150 @@
+.header__cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--onyx);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  width: 7rem;
+  margin-bottom: -10px;
+}
+
+.logo__text {
+  font-family: "Noto Serif";
+  font-size: 2.2rem;
+  color: var(--onyx);
+}
+
+.logo__cont {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.icon {
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  background-color: transparent;
+  border: none;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+.arrIcon {
+  font-size: 2.6rem;
+  position: absolute;
+  right: 21rem;
+}
+
+.arrIcon:hover {
+  color: var(--red);
+}
+
+.mobileMenu {
+  background: var(--onyx);
+  color: var(--beige);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 180px;
+  border-bottom-left-radius: 8px;
+  width: 0;
+  visibility: hidden;
+  transition: width 0.3s ease-in-out, visibility 0s 0.3s;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mobileMenu.open {
+  width: 20rem;
+  visibility: visible;
+  transition: width 0.3s ease-in-out, visibility 0s 0s;
+}
+
+.mobileMenu ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 2rem;
+  list-style: none;
+}
+
+.link {
+  font-size: 1.6rem;
+  color: var(--beige);
+  font-family: "Poppins";
+  transition: 0.2s all ease;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+  font-weight: 600;
+  font-size: 1.7rem;
+}
+
+.activeLink {
+  opacity: 1;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.activeLink:hover {
+  text-decoration: none;
+  font-size: 1.8rem;
+  opacity: 1;
+  font-weight: 700;
+}
+
+.largeMenu {
+  display: none;
+}
+
+.largeMenu ul {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  list-style: none;
+}
+
+.largeMenu .link {
+  color: var(--onyx);
+}
+
+@media (min-width: 768px) {
+  .header__cont {
+    padding: 2rem 4rem;
+  }
+
+  .mobileMenu,
+  .mobileMenu.open,
+  .icon {
+    display: none;
+  }
+
+  .largeMenu {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    width: 8rem;
+  }
+  .header__cont {
+    padding: 2rem 5rem;
+  }
+}
