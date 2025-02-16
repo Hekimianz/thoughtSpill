@@ -1,0 +1,64 @@
+.aboutCont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.aboutCont h1 {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.paragraph {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  max-width: 900px;
+  line-height: 25px;
+}
+
+.img {
+  width: 80%;
+  max-width: 700px;
+  margin: 20px 0;
+}
+
+.img:last-of-type {
+  max-width: 500px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  color: var(--onyx);
+  font-weight: 500;
+  font-family: "Poppins";
+  margin: 20px 0 20px 0;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-size: 1.6rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--onyx);
+  color: var(--beige);
+  font-weight: 700;
+  transform: scale(1.1);
+  border: 3px solid var(--olive);
+  outline: none;
+}
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
