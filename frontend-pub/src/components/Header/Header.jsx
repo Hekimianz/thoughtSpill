@@ -9,7 +9,11 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className={styles.header__cont}>
-      <Link to="/" className={styles.logo__cont}>
+      <Link
+        to="/"
+        className={styles.logo__cont}
+        onClick={() => setMenuOpen(false)}
+      >
         <img className={styles.logo} src="/logo__transparent.png" alt="logo" />
         <h3 className={styles.logo__text}>ThoughtSpill</h3>
       </Link>

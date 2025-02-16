@@ -1,0 +1,76 @@
+.postsCont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.postsCont input {
+  background-color: transparent;
+  text-align: center;
+  border: 1px solid var(--onyx);
+  padding: 4px;
+  border-radius: 4px;
+  transition: 0.2s all;
+  outline: 0px solid var(--onyx);
+}
+
+.postsCont input:focus {
+  outline: 2px solid var(--onyx);
+}
+
+.postsCont hr {
+  width: 80%;
+  margin-top: 20px;
+  border: none;
+  height: 1px;
+  background-color: var(--onyx);
+  max-width: 800px;
+}
+
+.loader {
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid var(--onyx);
+  border-bottom-color: #d4a373;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: absolute;
+  top: 30%;
+  align-self: center;
+}
+
+.booksCont {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 20px;
+  align-items: center;
+  justify-items: center;
+  gap: 30px;
+  padding: 3rem;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .booksCont {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding-top: 1rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .booksCont {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
