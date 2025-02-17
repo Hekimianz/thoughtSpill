@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   padding: 2rem;
   font-family: "Poppins";
 }
@@ -57,7 +58,8 @@
   font-size: 2rem;
 }
 
-.book__details ul hr {
+.book__details ul hr,
+.comments__cont hr {
   height: 1px;
   background-color: var(--onyx);
   border: none;
@@ -98,6 +100,87 @@
   opacity: 1;
   padding-top: 10px;
 }
+
+.subtitle {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.comments__cont {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.comments__cont hr {
+  width: 40%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: var(--green);
+  font-weight: 500;
+  margin-right: 5px;
+  transition: 0.2s all ease;
+}
+
+.link:hover {
+  font-size: 1.4rem;
+}
+
+.noUser {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.createComment {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.createComment textarea {
+  height: 100px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--onyx);
+  border-radius: 4px;
+  color: var(--onyx);
+  font-weight: 500;
+  font-family: "Poppins";
+  margin: 20px 0 20px 0;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-size: 1.6rem;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--onyx);
+  color: var(--beige);
+  font-weight: 700;
+  transform: scale(1.1);
+  border: 3px solid var(--olive);
+  outline: none;
+}
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

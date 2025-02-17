@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { getPost } from "../../api/posts";
+import { getPost, getComments } from "../../api/posts";
+import { useAuth } from "../../contexts/authProvider";
+import Comment from "../../components/Comment/Comment";
 import styles from "./Post.module.css";
 
 function Post() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [thoughtsOpen, setThoughtsOpen] = useState(false);
+  const [comments, setComments] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -16,9 +20,14 @@ function Post() {
       const fetchedPost = await getPost(id);
       setPost(fetchedPost);
     };
+    const fetchComments = async () => {
+      if (!id) return;
+      const fetchedComments = await getComments(id);
+      setComments(fetchedComments);
+    };
     fetchPost();
+    fetchComments();
   }, [id]);
-  console.log(post);
 
   return (
     <section className={styles.post__cont}>
@@ -70,6 +79,35 @@ function Post() {
               dangerouslySetInnerHTML={{ __html: post.thoughts }}
             />
           </div>
+          <div className={styles.comments__cont}>
+            <span className={styles.subtitle}>Comments</span>
+            <hr />
+            {comments?.map((comment) => (
+              <Comment comment={comment} key={comment.id} />
+            ))}
+          </div>
+          {!user && (
+            <div className={styles.noUser}>
+              <Link to="/sign-in" className={styles.link}>
+                Sign in
+              </Link>
+              or{" "}
+              <Link to="/register" className={styles.link}>
+                register
+              </Link>
+              to create comments!
+            </div>
+          )}
+          {user && (
+            <div className={styles.createComment}>
+              <textarea
+                name="comment"
+                id="comment"
+                placeholder="Post comment"
+              />
+              <button className={styles.button}>Post</button>
+            </div>
+          )}
         </>
       )}
     </section>

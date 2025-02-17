@@ -42,7 +42,61 @@ export const getPost = async (id) => {
     const { post } = await response.json();
     return post;
   } catch (err) {
-    console.error("Error fetching posts:", err);
+    console.error("Error fetching post:", err);
+    throw err;
+  }
+};
+
+export const getComments = async (id) => {
+  try {
+    let url = `${base_url}/api/posts/comments/${id}`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `HTTP error! status ${response.status}`
+      );
+    }
+    const { comments } = await response.json();
+    return comments;
+  } catch (err) {
+    console.error("Error fetching comments:", err);
+    throw err;
+  }
+};
+
+export const getUsername = async (id) => {
+  try {
+    let url = `${base_url}/api/user/${id}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+    const { user } = await response.json();
+    return user;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const postComment = async (text, userId, id) => {
+  try {
+    let url = `${base_url}/api/posts/comments/${id}`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      credentials: "include",
+    });
+    const { comment } = await response.json();
+    return comment;
+  } catch (err) {
+    console.error(err);
     throw err;
   }
 };
