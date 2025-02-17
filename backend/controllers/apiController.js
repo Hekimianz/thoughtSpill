@@ -138,3 +138,24 @@ exports.getUsername = async (req, res) => {
     res.json({ error: "Internal server error" });
   }
 };
+
+exports.postComment = async (req, res) => {
+  try {
+    const { text, userId } = req.body;
+    const { id } = req.params;
+    const comment = await prisma.comment.create({
+      data: {
+        text,
+        userId,
+        postId: id,
+      },
+    });
+    res.json({
+      message: "Comment created",
+      comment: comment,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ error: "Internal server error" });
+  }
+};
