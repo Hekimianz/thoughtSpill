@@ -18,7 +18,29 @@ export const getPosts = async (searchTerm = "") => {
     }
     const { posts } = await response.json();
 
-    return posts.reverse();
+    return posts.filter((post) => post.published).reverse();
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    throw err;
+  }
+};
+
+export const getPost = async (id) => {
+  try {
+    let url = `${base_url}/api/posts/${id}`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `HTTP error! status ${response.status}`
+      );
+    }
+    const { post } = await response.json();
+    return post;
   } catch (err) {
     console.error("Error fetching posts:", err);
     throw err;

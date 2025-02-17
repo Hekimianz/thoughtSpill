@@ -1,0 +1,108 @@
+.post__cont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  font-family: "Poppins";
+}
+
+.loader {
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid var(--onyx);
+  border-bottom-color: #d4a373;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: absolute;
+  top: 30%;
+  align-self: center;
+}
+
+.book__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.book__details ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+  font-size: 1.6rem;
+}
+
+.cover {
+  width: 80%;
+  max-width: 400px;
+  border-radius: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
+.author {
+  margin-top: -3px;
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.book__details ul hr {
+  height: 1px;
+  background-color: var(--onyx);
+  border: none;
+  margin-top: 5px;
+}
+
+.bold {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.icon {
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.thoughts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+  font-size: 1.6rem;
+  line-height: 25px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  max-width: 1000px;
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out,
+    padding 0.3s ease-in-out;
+}
+
+.thoughts.open {
+  max-height: 1000px;
+  opacity: 1;
+  padding-top: 10px;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
