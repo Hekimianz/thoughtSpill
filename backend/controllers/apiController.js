@@ -124,3 +124,17 @@ exports.addPost = async (req, res) => {
     res.json({ error: "Internal server error" });
   }
 };
+
+exports.getUsername = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    res.json({ message: "user found", user: user.username });
+  } catch (err) {
+    console.log(err);
+    res.json({ error: "Internal server error" });
+  }
+};
