@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authProvider";
 import styles from "./Register.module.css";
@@ -9,7 +9,22 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
   const [email, setEmail] = useState("");
+  const [invalid, setInvalid] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      password !== passwordConf ||
+      !password ||
+      !passwordConf ||
+      !email ||
+      !username
+    ) {
+      setInvalid(true);
+    } else {
+      setInvalid(false);
+    }
+  }, [password, passwordConf, email, username]);
 
   if (user) {
     navigate("/");
@@ -60,7 +75,9 @@ function Register() {
         className={styles.input}
         placeholder="Confirm Password"
       />
-      <button className={styles.button}>Register</button>
+      <button disabled={invalid} className={styles.button}>
+        Register
+      </button>
 
       <p>
         Already have an account? Sign in{" "}

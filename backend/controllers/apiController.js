@@ -142,20 +142,29 @@ exports.getUsername = async (req, res) => {
 exports.postComment = async (req, res) => {
   try {
     const { text, userId } = req.body;
-    const { id } = req.params;
+    const { id: postId } = req.params;
+
+    if (!text || typeof text !== "string" || text.trim().length === 0) {
+      return res.status(400).json({ error: "Comment text cannot be empty" });
+    }
+    if (!userId || typeof userId !== "string") {
+      return res.status(400).json({ error: "Invalid or missing userId" });
+    }
+
     const comment = await prisma.comment.create({
       data: {
-        text,
+        text: text.trim(),
         userId,
-        postId: id,
+        postId,
       },
     });
-    res.json({
-      message: "Comment created",
-      comment: comment,
+
+    res.status(201).json({
+      message: "Comment created successfully",
+      comment,
     });
   } catch (err) {
-    console.log(err);
-    res.json({ error: "Internal server error" });
+    console.error("Error posting comment:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

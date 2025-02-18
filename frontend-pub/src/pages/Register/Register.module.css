@@ -64,3 +64,9 @@
 .link:hover {
   font-size: 2.1rem;
 }
+
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
