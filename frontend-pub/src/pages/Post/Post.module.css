@@ -151,6 +151,7 @@
   height: 100px;
   padding: 10px;
   border-radius: 5px;
+  background-color: #d4a37363;
 }
 
 .button {
@@ -179,6 +180,11 @@
 .button:active {
   transform: scale(0.9);
   opacity: 0.9;
+}
+
+.emptyComments {
+  font-size: 1.2rem;
+  font-weight: 300;
 }
 
 @keyframes rotation {

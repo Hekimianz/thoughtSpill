@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { getPost, getComments } from "../../api/posts";
+import { getPost, getComments, postComment } from "../../api/posts";
 import { useAuth } from "../../contexts/authProvider";
 import Comment from "../../components/Comment/Comment";
 import styles from "./Post.module.css";
@@ -12,6 +12,7 @@ function Post() {
   const [post, setPost] = useState(null);
   const [thoughtsOpen, setThoughtsOpen] = useState(false);
   const [comments, setComments] = useState(null);
+  const [newComment, setNewComment] = useState("");
   const { user } = useAuth();
 
   useEffect(() => {
@@ -28,6 +29,20 @@ function Post() {
     fetchPost();
     fetchComments();
   }, [id]);
+
+  const handlePostComment = async () => {
+    if (!newComment.trim()) {
+      return;
+    }
+
+    try {
+      const comment = await postComment(newComment.trim(), user.id, id);
+      setComments((prev) => [comment, ...prev]);
+      setNewComment("");
+    } catch (err) {
+      console.error("Error posting comment:", err);
+    }
+  };
 
   return (
     <section className={styles.post__cont}>
@@ -82,9 +97,15 @@ function Post() {
           <div className={styles.comments__cont}>
             <span className={styles.subtitle}>Comments</span>
             <hr />
-            {comments?.map((comment) => (
-              <Comment comment={comment} key={comment.id} />
-            ))}
+            {comments.length >= 1 ? (
+              comments?.map((comment) => (
+                <Comment comment={comment} key={comment.id} />
+              ))
+            ) : (
+              <span className={styles.emptyComments}>
+                No one's chimed in yet—go ahead and start the discussion!
+              </span>
+            )}
           </div>
           {!user && (
             <div className={styles.noUser}>
@@ -104,8 +125,12 @@ function Post() {
                 name="comment"
                 id="comment"
                 placeholder="Post comment"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
               />
-              <button className={styles.button}>Post</button>
+              <button onClick={handlePostComment} className={styles.button}>
+                Post
+              </button>
             </div>
           )}
         </>

@@ -87,16 +87,26 @@ export const getUsername = async (id) => {
 
 export const postComment = async (text, userId, id) => {
   try {
-    let url = `${base_url}/api/posts/comments/${id}`;
+    const url = `${base_url}/api/posts/comments/${id}`;
 
     const response = await fetch(url, {
       method: "POST",
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text, userId }),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to post comment");
+    }
+
     const { comment } = await response.json();
     return comment;
   } catch (err) {
-    console.error(err);
+    console.error("Error posting comment:", err);
     throw err;
   }
 };
