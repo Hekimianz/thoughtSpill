@@ -92,8 +92,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const deleteAccount = async (id) => {
+    try {
+      const response = await fetch(`${base_url}/auth/account`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to delete account");
+      }
+
+      return await response.json();
+    } catch (err) {
+      console.error("Error deleting account:", err);
+      throw err;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, register }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, loading, register, deleteAccount }}
+    >
       {children}
     </AuthContext.Provider>
   );

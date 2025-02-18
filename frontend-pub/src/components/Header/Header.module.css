@@ -63,6 +63,7 @@ a {
   transition: width 0.3s ease-in-out, visibility 0s 0.3s;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 10;
 }
 
 .mobileMenu.open {
