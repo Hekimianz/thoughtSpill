@@ -72,6 +72,19 @@ function Header() {
               Account
             </NavLink>
           </li>
+          {user && (
+            <li>
+              <button
+                className={styles.link}
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
+              >
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
 
@@ -119,6 +132,19 @@ function Header() {
                 Account
               </NavLink>
             </li>
+            {user && (
+              <li>
+                <button
+                  className={styles.link}
+                  onClick={() => {
+                    logout();
+                    setMenuOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            )}
           </ul>
         </ul>
       </nav>

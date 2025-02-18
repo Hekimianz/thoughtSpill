@@ -57,7 +57,6 @@ a {
   position: absolute;
   top: 0;
   right: 0;
-  height: 180px;
   border-bottom-left-radius: 8px;
   width: 0;
   visibility: hidden;
@@ -88,6 +87,9 @@ a {
   transition: 0.2s all ease;
   opacity: 0.7;
   font-weight: 500;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .link:hover {
