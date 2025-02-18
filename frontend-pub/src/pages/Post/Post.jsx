@@ -97,7 +97,7 @@ function Post() {
           <div className={styles.comments__cont}>
             <span className={styles.subtitle}>Comments</span>
             <hr />
-            {comments.length >= 1 ? (
+            {comments?.length >= 1 ? (
               comments?.map((comment) => (
                 <Comment comment={comment} key={comment.id} />
               ))
