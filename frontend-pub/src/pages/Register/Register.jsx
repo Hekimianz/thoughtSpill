@@ -1,16 +1,26 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authProvider";
 import styles from "./Register.module.css";
 
 function Register() {
+  const { user, register } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/");
+    return;
+  }
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        await register(username, email, password);
+        navigate("/sign-in");
       }}
       className={styles.signin__cont}
     >
